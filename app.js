@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
+const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -8,6 +9,12 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
+
+const mongoDB = process.env.MONGODB_URI;
+mongoose.connect(mongoDB);
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'mongo connection error'));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,12 +30,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
