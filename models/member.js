@@ -9,4 +9,8 @@ const MemberSchema = new Schema({
     member_status: { type: String, required: true, maxLength: 35 },
 });
 
+MemberSchema.virtual('url').get(function () {
+    return `/users/member/${this._id}`;
+});
+
 module.exports = mongoose.model('Member', MemberSchema);
