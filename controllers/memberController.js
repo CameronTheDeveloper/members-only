@@ -45,7 +45,26 @@ exports.member_create_post = [
         .withMessage('Password must be 8 to 128 characters long.'),
 
     asyncHandler(async (req, res, next) => {
-        res.send('member create POST - not implemented');
+        const errors = validationResult(req);
+
+        const member = new Member({
+            first_name: req.body.memberFirstName,
+            last_name: req.body.memberLastName,
+            username: req.body.memberUserName,
+            password: req.body.memberPassword
+        });
+
+        if (!errors.isEmpty()) {
+            res.render('member_form', {
+                title: 'Please fix all errors in this form to become a member',
+                member: member,
+                errors: errors
+            });
+            return;
+        } else {
+            await member.save();
+            res.redirect(member.url);
+        }
     })
 ];
 
