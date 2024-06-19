@@ -63,7 +63,7 @@ exports.member_create_post = [
             return;
         } else {
             await member.save();
-            res.redirect(member.url);
+            res.redirect('/');
         }
     })
 ];
