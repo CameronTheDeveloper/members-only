@@ -7,10 +7,10 @@ router.get('/', function (req, res, next) {
   res.redirect('respond with a resource');
 });
 
-router.get('/member/:id', member_controller.member_detail);
-
 router.get('/member/create', member_controller.member_create_get);
 router.post('/member/create', member_controller.member_create_post);
+
+router.get('/member/:id', member_controller.member_detail);
 
 router.get('/member/:id/delete', member_controller.member_delete_get);
 router.post('/member/:id/delete', member_controller.member_delete_post);
