@@ -11,7 +11,9 @@ exports.member_detail = asyncHandler(async (req, res, next) => {
 });
 
 exports.member_create_get = asyncHandler(async (req, res, next) => {
-    res.send('member create GET - not implemented');
+    res.render('member_form', {
+        title: 'Please fill out this form to become a member'
+    });
 });
 
 exports.member_create_post = asyncHandler(async (req, res, next) => {
