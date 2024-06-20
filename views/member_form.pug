@@ -5,15 +5,15 @@ block content
 
     form(method='POST')
         label(for='memberFirstName') First Name: 
-        input(type='text' id='memberFirstName' name='memberFirstName' placeholder='First Name')
+        input(type='text' id='memberFirstName' name='memberFirstName' placeholder='First Name' required value=(undefined===member ? '' : member.first_name))
         label(for='memberLastName') Last Name: 
-        input(type='text' id='memberLastName' name='memberLastName' placeholder='Last Name')
+        input(type='text' id='memberLastName' name='memberLastName' placeholder='Last Name' required value=(undefined===member ? '' : member.last_name))
         label(for='memberUsername') Username: 
-        input(type='text' id='memberUsername' name='memberUsername' placeholder='Username')
+        input(type='text' id='memberUsername' name='memberUsername' placeholder='Username' required value=(undefined===member ? '' : member.username))
         label(for='memberPassword') Password: 
-        input(type='password' id='memberPassword' name='memberPassword' placeholder='Password')
+        input(type='password' id='memberPassword' name='memberPassword' placeholder='Password' required)
         label(for='confirmMemberPassword') Confirm Password: 
-        input(type='password' id='confirmMemberPassword' name='confirmMemberPassword' placeholder='Confirm Password')
+        input(type='password' id='confirmMemberPassword' name='confirmMemberPassword' placeholder='Confirm Password' required)
         button(type='submit') Sign Up
 
     if errors
