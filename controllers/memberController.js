@@ -97,6 +97,11 @@ exports.member_create_post = [
     })
 ];
 
+exports.member_login_post = passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/'
+});
+
 exports.member_delete_get = asyncHandler(async (req, res, next) => {
     res.send('member delete GET - not implemented');
 });
