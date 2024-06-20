@@ -2,8 +2,8 @@ const Message = require('../models/message');
 const asyncHandler = require('express-async-handler');
 
 
-exports.message_list = asyncHandler(async (req, res, next) => {
-    res.send('message list display - not implemented');
+exports.index = asyncHandler(async (req, res, next) => {
+    res.render('index', { title: 'Members Only', member: req.member });
 });
 
 exports.message_detail = asyncHandler(async (req, res, next) => {
