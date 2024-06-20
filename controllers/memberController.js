@@ -1,6 +1,8 @@
 const Member = require('../models/member');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 const { body, validationResult } = require('express-validator');
 
 exports.member_list = asyncHandler(async (req, res, next) => {
@@ -111,3 +113,19 @@ exports.member_edit_post = asyncHandler(async (req, res, next) => {
     res.send('member edit POST - not implemented');
 });
 
+passport.use(
+    new LocalStrategy(async (username, password, done) => {
+        try {
+            const user = await Member.findOne({ username: username });
+            if (!user) {
+                return done(null, false, { message: "Incorrect username" });
+            };
+            if (user.password !== password) {
+                return done(null, false, { message: "Incorrect password" });
+            };
+            return done(null, user);
+        } catch (err) {
+            return done(err);
+        };
+    })
+);
