@@ -44,6 +44,12 @@ exports.member_create_post = [
         .isLength({ min: 8, max: 128 })
         .escape()
         .withMessage('Password must be 8 to 128 characters long.'),
+    body('confirmMemberPassword')
+        .trim()
+        .custom((value, { req }) => {
+            return value === req.body.memberPassword;
+        })
+        .withMessage('Password does not match confirmed password'),
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
