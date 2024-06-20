@@ -1,5 +1,6 @@
 const Member = require('../models/member');
 const asyncHandler = require('express-async-handler');
+const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 
 exports.member_list = asyncHandler(async (req, res, next) => {
@@ -47,23 +48,42 @@ exports.member_create_post = [
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
 
-        const member = new Member({
-            first_name: req.body.memberFirstName,
-            last_name: req.body.memberLastName,
-            username: req.body.memberUserName,
-            password: req.body.memberPassword
-        });
+
 
         if (!errors.isEmpty()) {
+            const member = new Member({
+                first_name: req.body.memberFirstName,
+                last_name: req.body.memberLastName,
+                username: req.body.memberUserName,
+            });
+
             res.render('member_form', {
                 title: 'Please fix all errors in this form to become a member',
                 member: member,
-                errors: errors
+                errors: errors.array()
             });
             return;
         } else {
-            await member.save();
-            res.redirect('/');
+            try {
+                bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+                    if (err) {
+                        return next(err);
+                    } else {
+                        const member = new Member({
+                            first_name: req.body.memberFirstName,
+                            last_name: req.body.memberLastName,
+                            username: req.body.memberUserName,
+                            password: hashedPassword
+                        });
+
+                        await member.save();
+                        res.redirect('/');
+                    }
+                });
+            }
+            catch (err) {
+                return next(err);
+            }
         }
     })
 ];
