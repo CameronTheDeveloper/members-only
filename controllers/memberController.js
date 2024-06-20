@@ -60,7 +60,7 @@ exports.member_create_post = [
             const member = new Member({
                 first_name: req.body.memberFirstName,
                 last_name: req.body.memberLastName,
-                username: req.body.memberUserName,
+                username: req.body.memberUsername,
             });
 
             res.render('member_form', {
