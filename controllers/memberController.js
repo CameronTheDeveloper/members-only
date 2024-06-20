@@ -97,6 +97,12 @@ exports.member_create_post = [
     })
 ];
 
+exports.member_login_get = asyncHandler(async (req, res, next) => {
+    res.render('member_login', {
+        title: 'Log in to your account'
+    });
+});
+
 exports.member_login_post = passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/'
