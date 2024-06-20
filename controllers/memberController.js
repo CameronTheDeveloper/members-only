@@ -65,15 +65,16 @@ exports.member_create_post = [
             return;
         } else {
             try {
-                bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+                bcrypt.hash(req.body.memberPassword, 10, async (err, hashedPassword) => {
                     if (err) {
                         return next(err);
                     } else {
                         const member = new Member({
                             first_name: req.body.memberFirstName,
                             last_name: req.body.memberLastName,
-                            username: req.body.memberUserName,
-                            password: hashedPassword
+                            username: req.body.memberUsername,
+                            password: hashedPassword,
+                            status_level: 1
                         });
 
                         await member.save();
