@@ -3,3 +3,11 @@ extends layout
 block content
   h1 Welcome #{member ? member.username : `to the ${title} page`}
   p Welcome to #{title}
+  if member
+    form(action="/users/member/logout") 
+      button(type='submit') Log Out of #{`${member.username}`}
+  else 
+    form(action="/users/member/login") 
+      button(type='submit') Log in
+    form(action="/users/member/create") 
+      button(type='submit') Create account
