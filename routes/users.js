@@ -10,6 +10,8 @@ router.get('/', function (req, res, next) {
 router.get('/member/create', member_controller.member_create_get);
 router.post('/member/create', member_controller.member_create_post);
 
+router.get('/member/login', member_controller.member_login_get);
+
 router.get('/member/:id', member_controller.member_detail);
 
 router.get('/member/:id/delete', member_controller.member_delete_get);

@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 
 
 exports.index = asyncHandler(async (req, res, next) => {
-    res.render('index', { title: 'Members Only', member: req.member });
+    res.render('index', { title: 'Members Only', member: req.user });
 });
 
 exports.message_detail = asyncHandler(async (req, res, next) => {
