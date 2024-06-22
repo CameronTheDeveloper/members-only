@@ -105,7 +105,7 @@ exports.member_login_get = asyncHandler(async (req, res, next) => {
 
 exports.member_logout_get = asyncHandler(async (req, res, next) => {
     res.render('member_logout', {
-        title: 'Log Out'
+        title: `Logging out of ${req.user.username}`
     });
 });
 
