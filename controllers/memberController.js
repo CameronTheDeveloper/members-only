@@ -103,6 +103,11 @@ exports.member_login_get = asyncHandler(async (req, res, next) => {
     });
 });
 
+exports.member_logout_get = asyncHandler(async (req, res, next) => {
+    res.render('member_logout', {
+        title: 'Log Out'
+    });
+});
 
 exports.member_delete_get = asyncHandler(async (req, res, next) => {
     res.send('member delete GET - not implemented');
