@@ -109,6 +109,15 @@ exports.member_logout_get = asyncHandler(async (req, res, next) => {
     });
 });
 
+exports.member_logout_post = asyncHandler(async (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/');
+    });
+});
+
 exports.member_delete_get = asyncHandler(async (req, res, next) => {
     res.send('member delete GET - not implemented');
 });

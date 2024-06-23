@@ -11,7 +11,9 @@ router.get('/member/create', member_controller.member_create_get);
 router.post('/member/create', member_controller.member_create_post);
 
 router.get('/member/login', member_controller.member_login_get);
+
 router.get('/member/logout', member_controller.member_logout_get);
+router.post('/member/logout', member_controller.member_logout_post);
 
 router.get('/member/:id', member_controller.member_detail);
 
