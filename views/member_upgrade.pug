@@ -1,0 +1,17 @@
+extends layout 
+
+block content 
+    h1=title 
+
+    h4
+        em #{`Your current status level: ${member.status_level}`}
+
+    if member.status_level <= 1 
+        form(method='POST')
+            label(for='upgradeMemberPassword') Enter the password to upgrade your membership: 
+            input(type='password' name='upgradeMemberPassword' id='upgradeMemberPassword' placeholder='password')
+            button(type='submit') Submit 
+
+    hr
+    p
+        a(href='/') Cancel    
