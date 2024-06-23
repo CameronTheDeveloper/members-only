@@ -16,6 +16,7 @@ router.get('/member/logout', member_controller.member_logout_get);
 router.post('/member/logout', member_controller.member_logout_post);
 
 router.get('/member/upgrade', member_controller.member_upgrade_get);
+router.post('/member/upgrade', member_controller.member_upgrade_post);
 
 router.get('/member/:id', member_controller.member_detail);
 

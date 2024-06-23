@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const Member = require('../models/member');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs');
@@ -120,9 +122,23 @@ exports.member_logout_post = asyncHandler(async (req, res, next) => {
 
 exports.member_upgrade_get = asyncHandler(async (req, res, next) => {
     res.render('member_upgrade', {
-        title: 'Upgrade your member ship level',
+        title: 'Upgrade your membership level',
         member: req.user
     });
+});
+
+exports.member_upgrade_post = asyncHandler(async (req, res, next) => {
+    const password = process.env.UPGRADE_PASSWORD_1 || 'backuppassword1';
+
+    if (req.body.upgradeMemberPassword === password) {
+        await Member.findByIdAndUpdate(req.user._id, { status_level: 2 }, {}).exec();
+        res.redirect('/');
+    } else {
+        res.render('member_upgrade', {
+            title: 'Sorry, you entered the incorrect upgrade password. Please enter the correct password to upgrade your membership level',
+            member: req.user
+        });
+    }
 });
 
 exports.member_delete_get = asyncHandler(async (req, res, next) => {
