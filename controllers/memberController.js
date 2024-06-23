@@ -118,6 +118,13 @@ exports.member_logout_post = asyncHandler(async (req, res, next) => {
     });
 });
 
+exports.member_upgrade_get = asyncHandler(async (req, res, next) => {
+    res.render('member_upgrade', {
+        title: 'Upgrade your member ship level',
+        member: req.user
+    });
+});
+
 exports.member_delete_get = asyncHandler(async (req, res, next) => {
     res.send('member delete GET - not implemented');
 });
