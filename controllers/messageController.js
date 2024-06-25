@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator');
 const Message = require('../models/message');
 const asyncHandler = require('express-async-handler');
 
@@ -11,7 +12,9 @@ exports.message_detail = asyncHandler(async (req, res, next) => {
 });
 
 exports.message_create_get = asyncHandler(async (req, res, next) => {
-    res.send('message create GET - not implemented');
+    res.render('message_form', {
+        title: 'Create a message'
+    });
 });
 
 exports.message_create_post = asyncHandler(async (req, res, next) => {
