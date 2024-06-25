@@ -12,3 +12,17 @@ block content
       button(type='submit') Log in
     form(action="/users/member/create") 
       button(type='submit') Create account
+
+  if message_list.length
+    h2 Messages: 
+    ul 
+      each message in message_list 
+        li 
+          h3=message.title 
+          a(href=message.author.url) #{message.author.username}
+          p 
+            em #{`(${message.date_posted_formatted})`}
+          p=message.text 
+  else 
+    h2 There are currently no messages
+
