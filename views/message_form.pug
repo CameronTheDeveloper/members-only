@@ -1,0 +1,17 @@
+extends layout 
+
+block content 
+
+    h1=title 
+
+    form(method='POST')
+        label(for='messageTitle') Title: 
+        input(type='text' name='messageTitle' id='messageTitle' placeholder='Title')
+        label(for='messageText') Text: 
+        input(type='text' name='messageText' id='messageText' placeholder='Type message here')
+        button(type='submit') Submit
+
+    if errors
+        ul
+            for error in errors
+                li=error.msg
