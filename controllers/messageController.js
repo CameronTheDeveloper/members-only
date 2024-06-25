@@ -1,4 +1,4 @@
-const { validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 const Message = require('../models/message');
 const asyncHandler = require('express-async-handler');
 
@@ -17,9 +17,39 @@ exports.message_create_get = asyncHandler(async (req, res, next) => {
     });
 });
 
-exports.message_create_post = asyncHandler(async (req, res, next) => {
-    res.send('message create POST - not implemented');
-});
+exports.message_create_post = [
+    body('messageTitle')
+        .trim()
+        .escape()
+        .not().isEmpty().withMessage('Message title is required')
+        .isLength({ max: 50 }).withMessage('Message title can\'t be longer than 50 characters'),
+    body('messageText')
+        .trim()
+        .escape()
+        .not().isEmpty().withMessage('Message text is required')
+        .isLength({ max: 1000 }).withMessage('Message text can\'t be longer than 1000 characters'),
+
+    asyncHandler(async (req, res, next) => {
+        const errors = validationResult(req);
+
+        const message = new Message({
+            title: req.body.messageTitle,
+            text: req.body.messageText,
+            date_posted: Date.now(),
+            author: req.body.user
+        });
+
+        if (!errors.isEmpty()) {
+            res.render('message_form', {
+                title: 'Create a message',
+                message: message,
+                errors: errors.array()
+            });
+        } else {
+            await message.save();
+            res.redirect('/');
+        }
+})];
 
 exports.message_delete_get = asyncHandler(async (req, res, next) => {
     res.send('message delete GET - not implemented');
