@@ -36,7 +36,7 @@ exports.message_create_post = [
             title: req.body.messageTitle,
             text: req.body.messageText,
             date_posted: Date.now(),
-            author: req.body.user
+            author: req.user._id
         });
 
         if (!errors.isEmpty()) {
