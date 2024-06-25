@@ -4,9 +4,13 @@ block content
   h1 Welcome #{member ? member.username : `to the ${title} page`}
   p Welcome to #{title}
   if member
-    a(href='/message/create') Add new message 
-    form(action="/users/member/logout") 
-      button(type='submit') Log Out of #{`${member.username}`}
+    p
+      a(href='/message/create') Add new message 
+    p
+      a(href='/users/member/upgrade') Upgrade your status level
+    p
+      form(action="/users/member/logout") 
+        button(type='submit') Log Out of #{`${member.username}`}
   else 
     form(action="/users/member/login") 
       button(type='submit') Log in
