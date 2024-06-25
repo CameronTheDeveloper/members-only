@@ -19,7 +19,11 @@ block content
       each message in message_list 
         li 
           h3=message.title 
-          a(href=message.author.url) #{message.author.username}
+          if member && member.status_level >= 2
+            a(href=message.author.url) #{message.author.username}
+          else 
+            p 
+              em *Author hidden (level 2+ members only)*
           p 
             em #{`(${message.date_posted_formatted})`}
           p=message.text 
