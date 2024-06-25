@@ -4,7 +4,17 @@ const asyncHandler = require('express-async-handler');
 
 
 exports.index = asyncHandler(async (req, res, next) => {
-    res.render('index', { title: 'Members Only', member: req.user });
+    const allMessages = await Message.find()
+        .sort({date_posted: -1})
+        .populate('author')
+        .exec();
+
+    res.render('index', { 
+        title: 'Members Only',
+        message_list: allMessages,
+        member: req.user 
+    });
+
 });
 
 exports.message_detail = asyncHandler(async (req, res, next) => {
