@@ -9,6 +9,10 @@ const MessageSchema = new Schema({
     author: {type: Schema.Types.ObjectId, ref: 'Member', required: true}
 });
 
+MessageSchema.virtual('url').get(function () {
+    return `/message/${this._id}`;
+});
+
 MessageSchema.virtual('date_posted_formatted').get(function () {
     return DateTime.fromJSDate(this.date_posted).toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS);
 });
