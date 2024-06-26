@@ -62,7 +62,17 @@ exports.message_create_post = [
 })];
 
 exports.message_delete_get = asyncHandler(async (req, res, next) => {
-    res.send('message delete GET - not implemented');
+    const message = await Message.findById(req.params.id).exec();
+
+    if (message === null){
+        res.redirect('/');
+    }
+
+    res.render('message_delete', {
+        title: 'Delete message',
+        message: message
+    });
+
 });
 
 exports.message_delete_post = asyncHandler(async (req, res, next) => {
