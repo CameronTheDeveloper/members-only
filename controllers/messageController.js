@@ -76,7 +76,7 @@ exports.message_delete_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.message_delete_post = asyncHandler(async (req, res, next) => {
-    await Message.findByIdAndDelete(req.body.messageId);
+    await Message.findByIdAndDelete(req.body.deleteMessageId);
     res.redirect('/');
 });
 

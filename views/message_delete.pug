@@ -1,0 +1,17 @@
+extends layout 
+
+block content 
+    h1=title 
+    hr
+    h3=message.title 
+    a(href=message.author.url) #{message.author.username}
+    p 
+        em #{`(${message.date_posted_formatted})`}
+    p=message.text 
+
+    form(method='POST')
+        div
+            input(id='deleteMessageId' type='hidden' name='deleteMessageId' value=message._id)
+        button(type='submit') Delete 
+    
+    a(href='/') Cancel
