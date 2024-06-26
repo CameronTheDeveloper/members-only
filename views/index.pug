@@ -31,8 +31,9 @@ block content
           p 
             em #{`(${message.date_posted_formatted})`}
           p=message.text 
-          p 
-            a(href=`${message.url}/delete`) Delete Message
+          if member && member.status_level >= 2
+            p 
+              a(href=`${message.url}/delete`) Delete Message
   else 
     h2 There are currently no messages
 
