@@ -76,7 +76,8 @@ exports.message_delete_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.message_delete_post = asyncHandler(async (req, res, next) => {
-    res.send('message delete POST - not implemented');
+    await Message.findByIdAndDelete(req.body.messageId);
+    res.redirect('/');
 });
 
 exports.message_edit_get = asyncHandler(async (req, res, next) => {
