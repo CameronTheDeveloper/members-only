@@ -12,8 +12,11 @@ const passport = require("passport");
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const compression = require('compression');
+const helmet = require('helmet');
 
 const app = express();
+
+app.use(helmet());
 
 const mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB);
